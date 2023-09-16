@@ -1,7 +1,22 @@
-package api
+package spec
 
 type Spec struct {
+	Info       Info       `yaml:"info,omitempty"`
 	Components Components `yaml:"components,omitempty"`
+}
+
+type Info struct {
+	Title       string  `yaml:"title,omitempty"`
+	Version     string  `yaml:"version,omitempty"`
+	Description string  `yaml:"description,omitempty"`
+	License     License `yaml:"license,omitempty"`
+
+	XApiVersion string `yaml:"x-api-version,omitempty"`
+}
+
+type License struct {
+	Name string `yaml:"name,omitempty"`
+	Url  string `yaml:"url,omitempty"`
 }
 
 type Components struct {
@@ -27,7 +42,7 @@ type Schema struct {
 	// When set to true
 	// - exactly one property in the schema MUST be set at all times
 	// - list of required properties in the schema MUST be empty
-	XApiUnion bool `yaml:"x-api-union,omitempty"`
+	XApiChoice bool `yaml:"x-api-choice,omitempty"`
 }
 
 type Properties map[string]Property
@@ -38,12 +53,12 @@ type Property struct {
 	Ref *string `yaml:"$ref,omitempty"`
 
 	// Possible values are `string`, `integer`, `number`, `boolean` and `array`
-	Type    string  `yaml:"type,omitempty"`
-	Format  *string `yaml:"format,omitempty"`
-	Pattern *string `yaml:"pattern,omitempty"`
-	Min     *string `yaml:"min,omitempty"`
-	Max     *string `yaml:"max,omitempty"`
-	Default *string `yaml:"default,omitempty"`
+	Type    string      `yaml:"type,omitempty"`
+	Format  *string     `yaml:"format,omitempty"`
+	Pattern *string     `yaml:"pattern,omitempty"`
+	Min     *string     `yaml:"min,omitempty"`
+	Max     *string     `yaml:"max,omitempty"`
+	Default interface{} `yaml:"default,omitempty"`
 
 	Enum []string `yaml:"enum,omitempty"`
 

@@ -1,3 +1,5 @@
-module github.com/xapi-tools/api
+module github.com/xapi-tools/spec
 
 go 1.21.1
+
+require gopkg.in/yaml.v3 v3.0.1
